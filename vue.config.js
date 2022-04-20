@@ -13,10 +13,12 @@ const name = defaultSettings.title || 'vue Admin Template' // page title
 // For example, Mac: sudo npm run
 // You can change the port by the following methods:
 // port = 9528 npm run dev OR npm run dev --port = 9528
-const port = process.env.port || process.env.npm_config_port || 9528 // dev port
+const port = process.env.port || process.env.npm_config_port || 8889 // dev port
 
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
 module.exports = {
+
+
   /**
    * You will need to set publicPath if you plan to deploy your site under a sub path,
    * for example GitHub Pages. If you plan to deploy your site to https://foo.github.io/bar/,
@@ -35,8 +37,18 @@ module.exports = {
     overlay: {
       warnings: false,
       errors: true
-    }
+    },
     // before: require('./mock/mock-server.js')
+    // 配置反向代理
+    proxy: {
+      // 当地址中有/api的时候触发代理机制
+      '/api': {
+        target: 'http://ihrm-java.itheima.net/', // 要代理的服务器地址 不用写api
+        changeOrigin: true
+        // 重写路径
+        // pathRewrite：{}
+      }
+    }
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
