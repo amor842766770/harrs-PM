@@ -16,9 +16,9 @@ module.exports = {
   rules: {
     "vue/html-self-closing": ["error", {
       "html": {
-        "void": "always",
-        "normal": "never",
-        "component": "always"
+        "void": "never",
+        "normal": "anyr",
+        "component": "any"
       }
     }],
     "vue/max-attributes-per-line": [2, {
@@ -28,8 +28,8 @@ module.exports = {
         "allowFirstLine": false
       }
     }],
-    "svg": "always",
-    "math": "always",
+    // "svg": "always",
+    // "math": "always",
     "vue/singleline-html-element-content-newline": "off",
     "vue/multiline-html-element-content-newline": "off",
     "vue/name-property-casing": ["error", "PascalCase"],

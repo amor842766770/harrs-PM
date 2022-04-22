@@ -64,7 +64,7 @@ export default {
         // 告诉父组件 显示弹层
         this.$emit('addDepts', this.treeNode) // 为何传出treeNode 因为是添加子部门 需要当前部门的数据
       } else if (type === 'edt') {
-        alert('2')
+        this.$emit('editDepts', this.treeNode)
       } else {
         this.$confirm('您确定要删除该组织部门吗?').then(() => {
           return delDepartments(this.treeNode.id)

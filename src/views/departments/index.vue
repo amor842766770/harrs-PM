@@ -4,7 +4,7 @@
       <!-- 组织架构内容 - 头部 -->
       <el-card class="tree-card">
         <!-- 放置结构内容 -->
-        <tree-tools :tree-node="company" :is-root="true" />
+        <tree-tools :tree-node="company" :is-root="true" @addDepts="addDepts" />
         <!-- 防止tree组件 -->
         <!--放置一个属性   这里的props和我们之前学习的父传子 的props没关系-->
         <el-tree
@@ -19,11 +19,17 @@
             :tree-node="data"
             @delDepts="getDepartment"
             @addDepts="addDepts"
+            @editDepts="editDepts"
           />
         </el-tree>
       </el-card>
     </div>
-    <add-dept :show-dialog="showDialog" />
+    <add-dept
+      ref="addDept"
+      :show-dialog.sync="showDialog"
+      :tree-node="node"
+      @addDepts="getDepartment"
+    />
   </div>
 </template>
 
@@ -33,6 +39,10 @@ import AddDept from './components/add-dept.vue';
 import { getDepartments } from '@/api/departments'
 import { tranListToTreeData } from '@/utils'
 export default {
+  components: {
+    TreeTools,
+    AddDept
+  },
   data() {
     return {
       company: {},
@@ -44,10 +54,6 @@ export default {
       node: null//记录当前点击的节点
     }
   },
-  components: {
-    TreeTools,
-    AddDept
-  },
   created() {
 
     this.getDepartment()//调用自身方法
@@ -57,7 +63,7 @@ export default {
     async getDepartment() {
       const res = await getDepartments()
       console.log(res);
-      this.company = { name: res.companyName, manager: '负责人' }
+      this.company = { name: res.companyName, manager: '负责人', id: "" }
       this.departs = tranListToTreeData(res.depts, "") //需要将其转化成树形结构
     },
     // 监听tree-tools中触发的点击添加子部门的事件
@@ -66,6 +72,11 @@ export default {
       this.showDialog = true // 显示弹层
       // 因为node是当前的点击的部门， 此时这个部门应该记录下来,
       this.node = node
+    },
+    editDepts(node) {
+      this.showDialog = true // 显示弹层
+      this.node = node
+      this.$refs.addDept.getDepartDetail(node.id);
     }
   }
 }
