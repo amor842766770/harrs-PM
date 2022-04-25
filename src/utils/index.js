@@ -116,7 +116,6 @@ export function param2Obj(url) {
   return obj
 }
 
-
 /*
 将列表型的数据转化成树形数据 => 递归算法 => 自身调用自身=> 条件一定不能一样 否则就会死循环
 遍历树形 有一个重点 要先找一个头儿
@@ -124,7 +123,7 @@ export function param2Obj(url) {
 export function tranListToTreeData(list, rootValue) {
   var arr = []
   list.forEach(item => {
-    if (item.pid === rootValue) { //找到之后 就要去找item下面有没有子节点
+    if (item.pid === rootValue) { // 找到之后 就要去找item下面有没有子节点
       const children = tranListToTreeData(list, item.id)
       if (children.length) {
         item.children = children
@@ -133,4 +132,4 @@ export function tranListToTreeData(list, rootValue) {
     }
   })
   return arr
-} 
+}

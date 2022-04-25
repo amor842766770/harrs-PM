@@ -1,3 +1,4 @@
+
 <template>
   <!-- 防止弹层组件 -->
   <el-dialog
@@ -13,23 +14,23 @@
     >
       <el-form-item label="部门名称" prop="name">
         <el-input
-          style="width: 80%"
           v-model="formData.name"
+          style="width: 80%"
           placeholder="1-50个字符"
         />
       </el-form-item>
       <el-form-item label="部门编码" prop="code">
         <el-input
-          style="width: 80%"
           v-model="formData.code"
+          style="width: 80%"
           placeholder="1-50个字符"
-        ></el-input>
+        />
       </el-form-item>
       <el-form-item label="负责人" prop="manager">
         <!-- native修饰符 可以找到原生元素的事件 -->
         <el-select
-          style="width: 80%"
           v-model="formData.manager"
+          style="width: 80%"
           placeholder="请选择"
           @focus="getEmployeeSimple"
         >
@@ -44,20 +45,20 @@
       </el-form-item>
       <el-form-item label="部门介绍" prop="introduce">
         <el-input
-          style="width: 80%"
           v-model="formData.introduce"
+          style="width: 80%"
           placeholder="1-300个字符"
           type="textarea"
           :rows="3"
-        ></el-input>
+        />
       </el-form-item>
     </el-form>
 
     <!-- el-dialog有专门放置底部操作栏的 插槽  具名插槽 -->
     <el-row slot="footer" type="flex" justify="center">
       <el-col :span="6">
-        <el-button @click="btnCancel" size="small">取 消</el-button>
-        <el-button type="primary" @click="btnOk" size="small">
+        <el-button size="small" @click="btnCancel">取 消</el-button>
+        <el-button type="primary" size="small" @click="btnOk">
           确 定
         </el-button>
       </el-col>
@@ -93,7 +94,7 @@ export default {
         //   找所有子部门
         isReapet = depts.filter(item => item.pid === this.treeNode.id).some(item => item.name === value)
       }
-      // 如果isReapet为true 表示找到了一样的名字   
+      // 如果isReapet为true 表示找到了一样的名字
       isReapet ? callback(new Error(`同级部门下已经存在${value}`)) : callback()
     }
     const checkCodeReapt = async (rule, value, callback) => {
@@ -102,7 +103,7 @@ export default {
       if (this.formData.id) {
         isReapet = depts.filter(item => item.id !== this.formData.id).some(item => item.code === value && value)
       } else {
-        //要求和所有部门的编码都不重复   由于历史数据有可能 没有code 所以说这里加一个=强制条件 value不为空
+        // 要求和所有部门的编码都不重复   由于历史数据有可能 没有code 所以说这里加一个=强制条件 value不为空
         isReapet = depts.some(item => item.code === value && value)
       }
 
@@ -144,13 +145,12 @@ export default {
     // 获取部门详情
     async getDepartDetail(id) {
       this.formData = await getDepartDetail(id)
-    }
-    ,
+    },
     btnOk() {
       // 手动校验表单
       this.$refs.deptForm.validate(async isOk => {
         if (isOk) {
-          // 表示可以提交了 
+          // 表示可以提交了
           if (this.formData.id) {
             // 编辑模式
             await updateDepartments(this.formData)
@@ -159,7 +159,7 @@ export default {
             await addDepartments({ ...this.formData, pid: this.treeNode.id })
           }
           // 通知父组件
-          this.$emit('addDepts',)
+          this.$emit('addDepts')
           // 此时应该修改showDialog值
           // update:props名称
           this.$emit('update:showDialog', false)

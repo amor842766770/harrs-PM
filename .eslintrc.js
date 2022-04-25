@@ -14,13 +14,6 @@ module.exports = {
   // add your custom rules here
   //it is base on https://github.com/vuejs/eslint-config-vue
   rules: {
-    "vue/html-self-closing": ["error", {
-      "html": {
-        "void": "never",
-        "normal": "anyr",
-        "component": "any"
-      }
-    }],
     "vue/max-attributes-per-line": [2, {
       "singleline": 10,
       "multiline": {
@@ -28,8 +21,6 @@ module.exports = {
         "allowFirstLine": false
       }
     }],
-    // "svg": "always",
-    // "math": "always",
     "vue/singleline-html-element-content-newline": "off",
     "vue/multiline-html-element-content-newline": "off",
     "vue/name-property-casing": ["error", "PascalCase"],
@@ -202,6 +193,6 @@ module.exports = {
     'object-curly-spacing': [2, 'always', {
       objectsInObjects: false
     }],
-    'array-bracket-spacing': [2, 'never'],
+    'array-bracket-spacing': [2, 'never']
   }
 }
