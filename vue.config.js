@@ -43,7 +43,8 @@ module.exports = {
     proxy: {
       // 当地址中有/api的时候触发代理机制
       '/api': {
-        target: 'http://ihrm-java.itheima.net/', // 要代理的服务器地址 不用写api
+        // target: 'http://ihrm-java.itheima.net/', // 要代理的服务器地址 不用写api
+        target: 'http://192.168.33.96:3000/',
         changeOrigin: true
         // 重写路径
         // pathRewrite：{}

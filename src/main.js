@@ -16,6 +16,8 @@ import * as filters from '@/filters'
 
 import '@/icons' // icon
 import '@/permission' // permission control
+import Print from 'vue-print-nb'
+Vue.use(Print);
 
 /**
  * If you don't want to use mock-server
@@ -25,6 +27,7 @@ import '@/permission' // permission control
  * Currently MockJs will be used in the production environment,
  * please remove it before going online ! ! !
  */
+
 Vue.use(Component) // 注册自己的插件
 // set ElementUI lang to EN
 Vue.use(ElementUI, { locale })

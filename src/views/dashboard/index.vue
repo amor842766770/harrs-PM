@@ -9,6 +9,7 @@
       </template>
     </page-tools>
     <div class="dashboard-text">name: {{ name }}</div>
+    <upload-image />
   </div>
 </template>
 
